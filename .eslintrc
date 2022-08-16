@@ -1,0 +1,83 @@
+{
+  parser: 'babel-eslint',
+  extends: ['eslint:recommended'],
+  env: {
+    browser: true,
+    jasmine: true,
+    jest: true,
+    jquery: true,
+    node: true
+  },
+  rules: {
+    // The rules below are listed in the order they appear on the eslint
+    // rules page. All rules are listed to make it easier to keep in sync
+    // as new ESLint rules are added.
+    // http://eslint.org/docs/rules/
+    // - Rules in the `eslint:recommended` ruleset that aren't specifically
+    //   mentioned by the google styleguide are listed but commented out (so
+    //   they don't override a base ruleset).
+    // Possible Errors
+    // http://eslint.org/docs/rules/#possible-errors
+    // ---------------------------------------------
+    'array-callback-return': 'error',
+    'brace-style': 'error',
+    camelcase: 'warn',
+    curly: 'error',
+    'default-case': 'error',
+    eqeqeq: 'error',
+    'implicit-arrow-linebreak': 'error',
+    'key-spacing': [
+      'error',
+      {
+        beforeColon: false,
+        afterColon: true,
+        mode: 'strict'
+      }
+    ],
+    'keyword-spacing': [
+      'error',
+      {
+        before: true,
+        after: true
+      }
+    ],
+    'lines-between-class-members': 'error',
+    'max-len': [
+      'error',
+      {
+        code: 110,
+        ignoreComments: true,
+        ignoreRegExpLiterals: true,
+        ignoreStrings: true,
+        ignoreTemplateLiterals: true
+      }
+    ],
+    'no-alert': 'error',
+    'no-duplicate-imports': 'error',
+    'no-else-return': 'error',
+    'no-empty-function': 'error',
+    'no-lonely-if': 'error',
+    'no-multi-spaces': 'error',
+    'no-multiple-empty-lines': 'error',
+    'no-template-curly-in-string': 'error',
+    'no-trailing-spaces': 'warn',
+    'no-shadow-restricted-names': 'error',
+    'no-undefined': 'off',
+    'no-var': 'error',
+    'object-curly-spacing': ['error', 'always'],
+    quotes: ['error', 'single', { avoidEscape: false }],
+    'require-await': 'error',
+    semi: ['error', 'always'],
+    'spaced-comment': [
+      'error',
+      'always',
+      {
+        block: {
+          exceptions: ['*'],
+          balanced: true
+        }
+      }
+    ]
+    // "no-blasphemy": ["error", "always"] create rule for the future
+  }
+}

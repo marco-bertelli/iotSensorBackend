@@ -48,7 +48,7 @@ export function createThing(thing: Thing) {
         thingName: thing.iotCode,
         attributePayload: {
             attributes: {
-                clientId: thing.clientId?.toString(),
+                clientId: thing.clientId.toString(),
                 laiType: thing.type,
                 billingGroupName: 'lai'
             }

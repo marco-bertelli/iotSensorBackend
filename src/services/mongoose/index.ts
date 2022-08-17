@@ -34,5 +34,9 @@ mongoose.connection.on('error', err => {
   process.exit(-1);
 });
 
+mongoose.connection.on('connected', () => {
+  logger.info('MongoDB connected');
+});
+
 
 export default mongoose;

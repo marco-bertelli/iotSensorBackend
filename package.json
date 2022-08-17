@@ -86,6 +86,8 @@
 		"proper-url-join": "^2.1.1",
 		"querymen": "^2.0.0",
 		"rand-token": "^0.3.0",
+		"redis": "^4.2.0",
+		"redis-om": "^0.3.6",
 		"request": "^2.74.0",
 		"request-promise": "^4.1.1",
 		"s3fs": "^2.5.0",

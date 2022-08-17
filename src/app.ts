@@ -7,6 +7,7 @@ import mongoose from './services/mongoose/index';
 
 import { initDevice } from './services/iot/index';
 import { checkMasterCertificate } from './services/iot/certManager';
+import { initRedis } from './services/redis';
 
 const {
 	env,
@@ -29,6 +30,9 @@ mongoose.connect(
 setImmediate(async () => {
 	// local machine cert handler
 	await checkMasterCertificate();
+
+	// redis init
+	await initRedis();
 
 	server.listen(port, ip, () => {
 		logger.info(

@@ -35,6 +35,11 @@ const config: any = {
 		secretMasterUrl: requireProcessEnv('SECRET_MASTER_URL'),
 		host: requireProcessEnv('HOST'),
 		disableScheduler: !!process.env.DISABLE_SCHEDULER || false,
+
+		// redis
+		redisUrl: requireProcessEnv('REDIS_URL'),
+		redisUsername: requireProcessEnv('REDIS_USERNAME'),
+		redisPwd: requireProcessEnv('REDIS_PWD'),
 	},
 	test: {
 		mongo: {

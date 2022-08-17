@@ -31,6 +31,9 @@ const config: any = {
 		expressSSLRedirect: false,
 		masterKey: requireProcessEnv('MASTER_KEY'),
 		jwtSecret: requireProcessEnv('JWT_SECRET'),
+		secretMasterName: requireProcessEnv('SECRET_MASTER_NAME'),
+		secretMasterUrl: requireProcessEnv('SECRET_MASTER_URL'),
+		host: requireProcessEnv('HOST'),
 		disableScheduler: !!process.env.DISABLE_SCHEDULER || false,
 	},
 	test: {
@@ -64,5 +67,4 @@ const config: any = {
 
 const mergedConfig: any = merge(config.all, config[config.all.env]);
 
-module.exports = mergedConfig;
-export default module.exports;
+export default mergedConfig

@@ -56,6 +56,8 @@
 		"amqplib": "^0.8.0",
 		"apidoc": "^0.16.1",
 		"apidoc-markdown2": "^0.3.6",
+		"aws-iot-device-sdk": "^2.2.12",
+		"aws-sdk": "^2.1196.0",
 		"babel-core": "^6.17.0",
 		"babel-eslint": "^7.0.0",
 		"babel-jest": "^18.0.0",

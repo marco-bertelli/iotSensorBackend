@@ -5,6 +5,9 @@ import Config from './config';
 import express from './services/express/index';
 import mongoose from './services/mongoose/index';
 
+import { initDevice } from './services/iot/index';
+import { checkMasterCertificate } from './services/iot/certManager';
+
 const {
 	env,
 	ip,
@@ -19,17 +22,22 @@ mongoose.connect(
 	mongo.uri,
 	{
 		maxIdleTimeMS: 10000,
-        keepAlive: false,
+		keepAlive: false,
 	}
 );
 
+setImmediate(async () => {
+	// local machine cert handler
+	await checkMasterCertificate();
 
-setImmediate(() => {
 	server.listen(port, ip, () => {
 		logger.info(
 			`Express server listening on http://${ip}:${port}, in ${env} mode`
 		);
 	});
+
+	// init aws iot
+	initDevice();
 });
 
 export default app;

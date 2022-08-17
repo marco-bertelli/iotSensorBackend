@@ -7,9 +7,9 @@ import logger from '../services/logger/index';
 
 import * as _ from 'lodash';
 import moment from 'moment';
+import { dataLogRepository } from '../services/redis';
 
-
-export const DataLogSchema = new Schema<DataLogDocument>({
+export const jsonSchema = {
     sensorId: {
         type: Types.ObjectId
     },
@@ -22,7 +22,9 @@ export const DataLogSchema = new Schema<DataLogDocument>({
     timestamp: {
         type: Number
     },
-});
+}
+
+export const DataLogSchema = new Schema<DataLogDocument>(jsonSchema);
 
 DataLogSchema.statics.parseMessage = async function (message: sensorMqttMessage) {
     const { sensorCode, value, measureUnit } = message;
@@ -33,6 +35,14 @@ DataLogSchema.statics.parseMessage = async function (message: sensorMqttMessage)
     }
 
     // TODO here alarm logic and control
+
+    // insert also in redis
+    await dataLogRepository.createAndSave({
+        sensorId: sensor._id.toString(),
+        value: value,
+        measureUnit: measureUnit,
+        timestamp: moment().unix()
+    });
 
     return await this.create({
         sensorId: sensor._id,
@@ -45,3 +55,4 @@ DataLogSchema.statics.parseMessage = async function (message: sensorMqttMessage)
 const DataLog = model<DataLogDocument, DataLogModelInterface>('DataLog', DataLogSchema);
 
 export { DataLog };
+

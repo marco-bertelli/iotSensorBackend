@@ -1,13 +1,14 @@
 import config from '../../config';
 import logger from '../logger/index';
+import { DataLog } from '../../models/datalogs';
 
 const awsIot = require('aws-iot-device-sdk');
 const AWS = require('aws-sdk');
-const secretMasterName = config.secretMasterName;
-const host = config.host;
-
 const os = require('os');
 
+const { secretMasterName, host } = config;
+
+// setting aws region
 AWS.config.update({ region: 'eu-central-1' });
 
 const iot = new AWS.Iot();
@@ -191,6 +192,5 @@ function parser(message: any) {
         logger.error(`error parsing message: ${message}`);
     }
 
-    // TODO save the received message
-    // DataLog.addMessage(objectMessage);
+    DataLog.parseMessage(objectMessage);
 }

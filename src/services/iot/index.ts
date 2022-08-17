@@ -17,7 +17,6 @@ interface Thing { iotCode: any; clientId: { toString: () => any; }; type: any; c
 let device: any;
 
 export function initDevice() {
-    // TODO before push change the cert info using the cert manager
     device = awsIot.device({
         keyPath: `${os.tmpdir()}/${secretMasterName}.private.pem.key`,
         certPath: `${os.tmpdir()}/${secretMasterName}.certificate.pem.crt`,

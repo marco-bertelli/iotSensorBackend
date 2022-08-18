@@ -7,7 +7,7 @@
 		"node": "~16.0.0"
 	},
 	"scripts": {
-		"start": "npm run build && node .",
+		"start": "npm run build  && node .",
 		"test": "mocha --compilers js:babel-core/register --recursive",
 		"test:unit": "npm test \"src/**/!(index).test.js\"",
 		"test:integration": "npm test \"src/**/index.test.js\"",

@@ -1,29 +1,34 @@
-import { Entity, Schema, Client, Repository } from 'redis-om';
+import { Entity, Schema } from 'redis-om';
 import * as _ from 'lodash';
 
 export function generateRedisSchema(mongooseSchema: any) {
-   class genricClass extends Entity {}
+    class genricClass extends Entity {}
 
-   const redisSchema = mongooseMapper(mongooseSchema);
+    const redisSchema = mongooseMapper(mongooseSchema);
 
-   const schema = new Schema(genricClass, redisSchema);
-   return schema; 
+    const schema = new Schema(genricClass, redisSchema);
+    return schema;
 }
 
-function mongooseMapper (mongooseSchema: any) {
+function mongooseMapper(mongooseSchema: any) {
     const arraySchema = _.map(mongooseSchema, (value, key) => {
         const type = typeParser(functionName(value))
         return { key, type }
     })
 
     return _.reduce(arraySchema, (obj: any, value) => {
-        obj[value.key] = {type: value.type}
+        // if (value.type === 'number') {
+        //     obj[value.key] = { type: value.type, sortable: true }
+        // }
+
+        obj[value.key] = { type: value.type }
+
         return obj
     }, {})
 }
 
-function typeParser (value: any) {
-    if(value.toLowerCase() === 'objectid') {
+function typeParser(value: any) {
+    if (value.toLowerCase() === 'objectid') {
         return 'string'
     }
 

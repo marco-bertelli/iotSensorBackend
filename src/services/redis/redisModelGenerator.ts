@@ -17,9 +17,9 @@ function mongooseMapper(mongooseSchema: any) {
     })
 
     return _.reduce(arraySchema, (obj: any, value) => {
-        // if (value.type === 'number') {
-        //     obj[value.key] = { type: value.type, sortable: true }
-        // }
+        if (value.type === 'number') {
+            obj[value.key] = { type: value.type, sortable: true }
+        }
 
         obj[value.key] = { type: value.type }
 

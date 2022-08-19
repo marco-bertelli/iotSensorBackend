@@ -10,6 +10,9 @@ export const SensorSchema = new Schema({
     name: {
         type: String
     },
+    color: {
+        type: String
+    },
 });
 
 const Sensor = model('Sensor', SensorSchema);

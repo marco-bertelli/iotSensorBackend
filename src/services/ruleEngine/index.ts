@@ -26,6 +26,7 @@ export async function checkRule(value: Number, rule: any, sensorId: any, ruleId:
     return await Alarm.create({
         ruleId: ruleId,
         startDate: new Date(),
+        sensorId: sensorId,
         triggerValue: value,
         type: 'active',
         name: ruleName,

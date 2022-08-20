@@ -42,8 +42,6 @@ DataLogSchema.statics.parseMessage = async function (message: sensorMqttMessage)
 
     const alarmsToCheck = await Alarm.find({sensorId: sensor._id, type: 'rule'})
 
-    console.log(alarmsToCheck)
-
     await BluePromise.map(alarmsToCheck, (alarm: any) => {
         return checkRule(Number(value), alarm.rule, sensor._id, alarm._id, alarm.name)
     })

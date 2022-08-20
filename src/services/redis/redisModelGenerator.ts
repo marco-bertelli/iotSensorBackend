@@ -5,7 +5,6 @@ export function generateRedisSchema(mongooseSchema: any) {
     class genricClass extends Entity {}
 
     const redisSchema = mongooseMapper(mongooseSchema);
-    console.log(redisSchema)
 
     const schema = new Schema(genricClass, redisSchema);
     return schema;

@@ -17,8 +17,45 @@ export function humidityAverageAggregate(start: Number, end: Number) {
             }
         },
         {
-            "$project" : {
-                "_id" : 0.0
+            "$project": {
+                "_id": 0.0
+            }
+        }
+    ] as any;
+}
+
+export function actualDataAggregation(start: number, end: number) {
+    return [
+        {
+            "$match": {
+                $and: [{ timestamp: { $gte: start } }, { timestamp: { $lt: end } }]
+            }
+        },
+        {
+            "$sort": {
+                "timestamp": -1.0
+            }
+        },
+        {
+            "$group": {
+                "_id": null,
+                "currentTemp": {
+                    "$first": "$value"
+                },
+                "currentHum": {
+                    "$first": "$humidity"
+                },
+                "maxTemp": {
+                    "$max": "$value"
+                },
+                "minTemp": {
+                    "$min": "$value"
+                }
+            }
+        },
+        {
+            "$project": {
+                "_id": 0.0
             }
         }
     ] as any;

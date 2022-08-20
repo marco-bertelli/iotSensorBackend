@@ -22,12 +22,15 @@ export const jsonSchema = {
     timestamp: {
         type: Number
     },
+    humidity: {
+        type: Number
+    }
 }
 
 export const DataLogSchema = new Schema<DataLogDocument>(jsonSchema);
 
 DataLogSchema.statics.parseMessage = async function (message: sensorMqttMessage) {
-    const { sensorCode, value, measureUnit } = message;
+    const { sensorCode, value, measureUnit, humidity } = message;
     const sensor = await Sensor.findOne({ code: sensorCode });
 
     if (_.isNil(sensor)) {
@@ -47,6 +50,7 @@ DataLogSchema.statics.parseMessage = async function (message: sensorMqttMessage)
     return await this.create({
         sensorId: sensor._id,
         value: value,
+        humidity: humidity || 40,
         measureUnit: measureUnit,
         timestamp: moment().unix()
     })

@@ -5,6 +5,7 @@ export function generateRedisSchema(mongooseSchema: any) {
     class genricClass extends Entity {}
 
     const redisSchema = mongooseMapper(mongooseSchema);
+    console.log(redisSchema)
 
     const schema = new Schema(genricClass, redisSchema);
     return schema;
@@ -19,6 +20,7 @@ function mongooseMapper(mongooseSchema: any) {
     return _.reduce(arraySchema, (obj: any, value) => {
         if (value.type === 'number') {
             obj[value.key] = { type: value.type, sortable: true }
+            return obj;
         }
 
         obj[value.key] = { type: value.type }

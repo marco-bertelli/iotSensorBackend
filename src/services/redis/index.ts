@@ -28,7 +28,6 @@ export async function initDatalogRepo() {
     const dataLogSchema = generateRedisSchema(jsonSchema)
     dataLogRepository = omClientSingleton.fetchRepository(dataLogSchema);
 
-    await dataLogRepository.dropIndex()
     await dataLogRepository.createIndex()
 }
 

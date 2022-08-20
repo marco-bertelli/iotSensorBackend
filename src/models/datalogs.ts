@@ -2,12 +2,15 @@ import { Schema, model, Types } from 'mongoose';
 import { sensorMqttMessage } from '../interfaces/deviceMessage';
 import { Sensor } from './sensors';
 import { DataLogDocument, DataLogModelInterface } from '../interfaces/dataLog';
+import { dataLogRepository } from '../services/redis';
+import { Alarm } from './alarms';
+import { checkRule } from '../services/ruleEngine';
 
 import logger from '../services/logger/index';
-
-import * as _ from 'lodash';
 import moment from 'moment';
-import { dataLogRepository } from '../services/redis';
+import * as _ from 'lodash';
+
+const BluePromise = require('bluebird');
 
 export const jsonSchema = {
     sensorId: {
@@ -37,7 +40,13 @@ DataLogSchema.statics.parseMessage = async function (message: sensorMqttMessage)
         return logger.error('sensor not found with code: ' + sensorCode)
     }
 
-    // TODO here alarm logic and control
+    const alarmsToCheck = await Alarm.find({sensorId: sensor._id, type: 'rule'})
+
+    console.log(alarmsToCheck)
+
+    await BluePromise.map(alarmsToCheck, (alarm: any) => {
+        return checkRule(Number(value), alarm.rule, sensor._id, alarm._id, alarm.name)
+    })
 
     // insert also in redis
     await dataLogRepository.createAndSave({

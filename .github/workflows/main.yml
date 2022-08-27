@@ -6,6 +6,13 @@ on:
       - master
 
 jobs:
+  python:
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' 
+
   build:
     runs-on: ubuntu-latest
     steps:

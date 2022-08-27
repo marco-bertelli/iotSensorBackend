@@ -21,6 +21,7 @@ router.get('/finished', async (req: any, res: { send: (arg0: any) => void; }) =>
             EX: 180,
             NX: true,
         })
+        return res.send(result);
     }
     res.send(JSON.parse(result))
 });

@@ -13,7 +13,7 @@ router.get('/predict', async ({ params: { sensorId } }: any, res: { send: (arg0:
     const nextHour = moment().add(1, 'hours').unix()
     const humidity = Number(80);
 
-    const handler = tf.io.fileSystem(__dirname + "/../../tensorflow/model.json");
+    const handler = tf.io.fileSystem(__dirname + "/../../../tensorflow/model.json");
     const model = await tf.loadLayersModel(handler);
 
     const tensor = tf.tensor([[Number(nextHour), Number(humidity)]])

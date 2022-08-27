@@ -22,6 +22,8 @@ COPY . .
 
 RUN npm run build
 
+COPY tensorflow ./
+
 CMD ["node", "./build"]
 
 

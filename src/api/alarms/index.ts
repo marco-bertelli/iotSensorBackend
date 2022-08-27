@@ -14,7 +14,7 @@ router.get('/finished', async (req: any, res: { send: (arg0: any) => void; }) =>
 
     // caching logic
     if (!result) {
-        result = await Alarm.find({ type: 'finish' });
+        result = await Alarm.find({ type: 'finish' }).sort({startDate: -1}).limit(4);
 
         // 3 minutes cache for this call
         await redis.set('finishedAlarms', JSON.stringify(result), {

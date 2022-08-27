@@ -1,10 +1,10 @@
-FROM node:14.16-alpine
+FROM node:buster-slim
 
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
-RUN apt update && \ 
-    apt install -y build-essential \
+RUN apt-get update && \ 
+    apt-get install -y build-essential \
     wget \
     python3 \
     make \

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { dataLogRepository } from '../../services/redis';
-import { actualDataAggregation, humidityAverageAggregate } from './aggregations';
+import { actualDataAggregation, humidityAverageAggregate, temperatureAverageAggregate } from './aggregations';
 import { DataLog } from '../../models/datalogs';
 
 import moment from 'moment';
@@ -37,6 +37,15 @@ router.get('/ambient/humidity/:interval', async ({ params: { interval } }: any, 
     const now = moment().unix()
 
     const average: any = await DataLog.aggregate(humidityAverageAggregate(lastHour, now))
+
+    res.send(average ? average[0] : null)
+});
+
+router.get('/ambient/temperature/:interval', async ({ params: { interval } }: any, res: { send: (arg0: any) => void; }) => {
+    const lastHour = moment().subtract(Number(interval), 'hours').unix()
+    const now = moment().unix()
+
+    const average: any = await DataLog.aggregate(temperatureAverageAggregate(lastHour, now))
 
     res.send(average ? average[0] : null)
 });

@@ -5,6 +5,12 @@ is stored in both redis and MongoDb and processed from the frontend (see the oth
 
 [![Embed your YouTube video](./assets/baseGraph.gif)](./assets/baseGraph.gif)
 
+[![Embed your YouTube video](./assets/customColor.gif)](./assets/customColor.gif)
+
+[![Embed your YouTube video](./assets/map.png)](./assets/map.png)
+
+[![Embed your YouTube video](./assets/footer.png)](./assets/footer.png)
+
 # Overview video (Optional)
 
 Here's a short video that explains the project and how it uses Redis:

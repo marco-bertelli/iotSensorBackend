@@ -3,27 +3,27 @@
 this is a project that get real time temperature and humidity data from esp32 with DHT22 AM2302 temperature sensor. after this the data
 is stored in both redis and MongoDb and processed from the frontend (see the other repo for more frontend info)
 
-[! (./assets/baseGraph.gif)](./assets/baseGraph.gif)
+[![Embed your YouTube video](./assets/baseGraph.gif)](./assets/baseGraph.gif)
 
-[! (./assets/customColor.gif)](./assets/customColor.gif)
+[![Embed your YouTube video](./assets/customColor.gif)](./assets/customColor.gif)
 
-[! (./assets/map.png)](./assets/map.png)
+[![Embed your YouTube video](./assets/map.png)](./assets/map.png)
 
-[! (./assets/footer.png)](./assets/footer.png)
+[![Embed your YouTube video](./assets/footer.png)](./assets/footer.png)
 
 # Overview video
 
 Here's a short video that explains the project and how it uses Redis:
 
-[! (./assets/map.png)](https://www.youtube.com/watch?v=0IFBh0KPuxA)
+[![Embed your YouTube video](./assets/map.png)](https://www.youtube.com/watch?v=0IFBh0KPuxA)
 
 ## How it works
 before start is important to understand the app architecture:
 
-[! (./assets/architecture.png)](./assets/architecture.png)
+[![Embed your YouTube video](./assets/architecture.png)](./assets/architecture.png)
 
 as we can see there are many different parts:
-* Backend: (this repo) write using node js and TS, handle the redis integration using redis OM, MongoDb integration, Aws Iot real time MQTT connection
+* Backend: write using node js and TS, handle the redis integration using redis OM, MongoDb integration, Aws Iot real time MQTT connection
 and Tensorflow js model utilization. Use redis for reading the real time sensor messagges over the MQTT channel "machines" and try to find a sensor associated with it,
 if found insert a datalog of the received data in both MongoDb and redis for rapid real time data into the frontend graph.
 the alarm logic is associated to the datalogs, if when a datalog is created trigger an alarm rule an active alarm is created and will be closed only when an alarm below the trashold arrive, all the alarms are stored and not deleted.
@@ -131,5 +131,5 @@ used github actions to deploy a docker image on heroku
 
 ## For more tecnical info read the dev article here!
 
-[!article](https://dev.to/marcobertelli/smarthome-your-home-data-in-real-time-2jjd)
+[article](https://dev.to/marcobertelli/smarthome-your-home-data-in-real-time-2jjd)
 

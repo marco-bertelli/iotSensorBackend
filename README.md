@@ -3,24 +3,24 @@
 this is a project that get real time temperature and humidity data from esp32 with DHT22 AM2302 temperature sensor. after this the data
 is stored in both redis and MongoDb and processed from the frontend (see the other repo for more frontend info)
 
-[!(./assets/baseGraph.gif)](./assets/baseGraph.gif)
+[! (./assets/baseGraph.gif)](./assets/baseGraph.gif)
 
-[!(./assets/customColor.gif)](./assets/customColor.gif)
+[! (./assets/customColor.gif)](./assets/customColor.gif)
 
-[!(./assets/map.png)](./assets/map.png)
+[! (./assets/map.png)](./assets/map.png)
 
-[!(./assets/footer.png)](./assets/footer.png)
+[! (./assets/footer.png)](./assets/footer.png)
 
 # Overview video
 
 Here's a short video that explains the project and how it uses Redis:
 
-[!(./assets/map.png)](https://www.youtube.com/watch?v=0IFBh0KPuxA)
+[! (./assets/map.png)](https://www.youtube.com/watch?v=0IFBh0KPuxA)
 
 ## How it works
 before start is important to understand the app architecture:
 
-[!(./assets/architecture.png)](./assets/architecture.png)
+[! (./assets/architecture.png)](./assets/architecture.png)
 
 as we can see there are many different parts:
 * Backend: (this repo) write using node js and TS, handle the redis integration using redis OM, MongoDb integration, Aws Iot real time MQTT connection

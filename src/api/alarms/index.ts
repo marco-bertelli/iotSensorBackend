@@ -5,8 +5,20 @@ import { redis } from '../../services/redis';
 const router = new (Router as any)();
 
 router.get('/active', async (req: any, res: { send: (arg0: any) => void; }) => {
-    const activeAlarms = await Alarm.find({ type: 'active' });
-    res.send(activeAlarms)
+    let result: any = await redis.get('activeAlarms');
+
+    // caching logic
+    if (!result) {
+        result = await Alarm.find({ type: 'active' });
+
+        // 1 minutes cache for this call
+        await redis.set('activeAlarms', JSON.stringify(result), {
+            EX: 60,
+            NX: true,
+        })
+        return res.send(result);
+    }
+    res.send(JSON.parse(result))
 });
 
 router.get('/finished', async (req: any, res: { send: (arg0: any) => void; }) => {

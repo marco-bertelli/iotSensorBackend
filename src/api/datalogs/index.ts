@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { dataLogRepository } from '../../services/redis';
+import { dataLogRepository, redis } from '../../services/redis';
 import { actualDataAggregation, humidityAverageAggregate, temperatureAverageAggregate } from './aggregations';
 import { DataLog } from '../../models/datalogs';
 
@@ -10,18 +10,31 @@ import moment from 'moment';
 const router = new (Router as any)();
 
 router.get('/predict', async ({ params: { sensorId } }: any, res: { send: (arg0: any) => void; }) => {
-    const nextHour = moment().add(1, 'hours').unix()
-    const humidity = Number(80);
+    let result: any = await redis.get('prediction');
 
-    const handler = tf.io.fileSystem(__dirname + "/../../../tensorflow/model.json");
-    const model = await tf.loadLayersModel(handler);
+    // caching logic
+    if (!result) {
+        const nextHour = moment().add(1, 'hours').unix()
+        const humidity = Number(80);
+    
+        const handler = tf.io.fileSystem(__dirname + "/../../../tensorflow/model.json");
+        const model = await tf.loadLayersModel(handler);
+    
+        const tensor = tf.tensor([[Number(nextHour), Number(humidity)]])
+    
+        const prediction = await model.predict(tensor)
+        result = prediction.dataSync();
 
-    const tensor = tf.tensor([[Number(nextHour), Number(humidity)]])
+        // 15 minutes cache for this call
+        // predictions don't need a fast changing cache
+        await redis.set('prediction', JSON.stringify(result), {
+            EX: 900,
+            NX: true,
+        })
+        return res.send(result);
+    }
 
-    const prediction = await model.predict(tensor)
-    const values = prediction.dataSync();
-
-    res.send(values)
+    res.send(JSON.parse(result))
 });
 
 router.get('/ambient/now', async (req: any, res: { send: (arg0: any) => void; }) => {

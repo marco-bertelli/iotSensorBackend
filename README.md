@@ -1,8 +1,9 @@
-# [Insert your hackathon title or the app's title (keep it short)]
+# SmartHome
 
-[Insert description of app]
+this is a project that get real time temperature and humidity data from esp32 with DHT22 AM2302 temperature sensor. after this the data
+is stored in both redis and MongoDb and processed from the frontend (see the other repo for more frontend info)
 
-[Insert app screenshots](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#uploading-assets)
+[Insert app screenshots](./assets/baseGraph.gif)
 
 # Overview video (Optional)
 

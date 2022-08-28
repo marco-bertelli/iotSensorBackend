@@ -11,15 +11,24 @@ is stored in both redis and MongoDb and processed from the frontend (see the oth
 
 [![Embed your YouTube video](./assets/footer.png)](./assets/footer.png)
 
-# Overview video (Optional)
+# Overview video
 
 Here's a short video that explains the project and how it uses Redis:
 
-[Insert your own video here, and remove the one below]
-
-[![Embed your YouTube video](https://i.ytimg.com/vi/vyxdC1qK4NE/maxresdefault.jpg)](https://www.youtube.com/watch?v=vyxdC1qK4NE)
+[![Embed your YouTube video](./assets/map.png)](https://www.youtube.com/watch?v=0IFBh0KPuxA)
 
 ## How it works
+before start is important to understand the app architecture:
+
+[![Embed your YouTube video](./assets/architecture.png)](./assets/architecture.png)
+
+as we can see there are many different parts:
+* backend: (this repo) write using node js and TS, handle the redis integration using redis OM, MongoDb integration, Aws Iot real time MQTT connection
+and Tensorflow js model utilization. Use redis for reading the real time sensor messagges over the MQTT channel "machines" and try to find a sensor associated with it,
+if found insert a datalog of the received data in both MongoDb and redis for rapid real time data into the frontend graph.
+Tensorflow is used to read a very simple regression model and use it for the next hour predictions.
+
+* test second point
 
 ### How the data is stored:
 

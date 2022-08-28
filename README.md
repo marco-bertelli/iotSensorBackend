@@ -3,24 +3,24 @@
 this is a project that get real time temperature and humidity data from esp32 with DHT22 AM2302 temperature sensor. after this the data
 is stored in both redis and MongoDb and processed from the frontend (see the other repo for more frontend info)
 
-[![Embed your YouTube video](./assets/baseGraph.gif)](./assets/baseGraph.gif)
+[!(./assets/baseGraph.gif)](./assets/baseGraph.gif)
 
-[![Embed your YouTube video](./assets/customColor.gif)](./assets/customColor.gif)
+[!(./assets/customColor.gif)](./assets/customColor.gif)
 
-[![Embed your YouTube video](./assets/map.png)](./assets/map.png)
+[!(./assets/map.png)](./assets/map.png)
 
-[![Embed your YouTube video](./assets/footer.png)](./assets/footer.png)
+[!(./assets/footer.png)](./assets/footer.png)
 
 # Overview video
 
 Here's a short video that explains the project and how it uses Redis:
 
-[![Embed your YouTube video](./assets/map.png)](https://www.youtube.com/watch?v=0IFBh0KPuxA)
+[!(./assets/map.png)](https://www.youtube.com/watch?v=0IFBh0KPuxA)
 
 ## How it works
 before start is important to understand the app architecture:
 
-[![Embed your YouTube video](./assets/architecture.png)](./assets/architecture.png)
+[!(./assets/architecture.png)](./assets/architecture.png)
 
 as we can see there are many different parts:
 * Backend: (this repo) write using node js and TS, handle the redis integration using redis OM, MongoDb integration, Aws Iot real time MQTT connection
@@ -95,7 +95,7 @@ Basic endpoints:
 * datalogs/: 
     - /predict: predict the next hour data, using redis cache to keep it for 15 minutes
     - /ambient/now: actual data
-    - /:sensorId/:interval: get datalogs of a sensor use redis JSON!
+    - /:sensorId/:interval: get datalogs of a sensor use redis JSON and redis Search!
     - /ambient/humidity/:interval: Average humidity
     - /ambient/temperature/:interval: Average temp
 * alarms/:
@@ -130,3 +130,6 @@ and after with redis 200 ms. redis cache also help a **lot** to decrease the num
 used github actions to deploy a docker image on heroku
 
 ## For more tecnical info read the dev article here!
+
+[!article](https://dev.to/marcobertelli/smarthome-your-home-data-in-real-time-2jjd)
+
